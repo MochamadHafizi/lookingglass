@@ -1,0 +1,33 @@
+body{
+    font-family: 'Poppins', sans-serif;
+}
+.logo{
+    margin-top: 3em;
+}
+
+
+.grid > div {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .grid > div label {
+    transition: background-color 0.4s ease-in-out;
+    cursor: pointer;
+    user-select: none;
+    display: block;
+    padding: 10px;
+    text-align: center;
+    border-radius: 15px;
+    color: #333;
+    background-color: #f0f0f0;
+  }
+
+  .grid > div input[type="radio"]:checked + label {
+    background-color: #FF6F00; /* Ganti warna sesuai kebutuhan Anda */
+    color: white;
+    font-weight: bold;
+  }
+  footer{
+    margin-top: 12em;
+  }
