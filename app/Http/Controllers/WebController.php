@@ -4,35 +4,50 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use GuzzleHttp\Client;
+use GuzzleHttp\HandlerStack;
+use GuzzleHttp\MessageFormatter;
+use GuzzleHttp\Middleware;
 
 
 class WebController extends Controller
 {
-    public function index(){
-        $domain = '';
-        $result = null;
+    // public function index(){
+    //     $domain = '';
+    //     $result = null;
+    //     // $isBrotliCompressed = null;
 
-        return view('web.main', compact('domain', 'result'));
-    }
+    //     return view('web.main', compact('domain', 'result'));
+    // }
 
-    public function post(Request $request)
-    {   
-        $request->validate([
-            'domain' => 'required',
-        ]);
+   
+   
 
-        $domain = $request->input('domain');
-        $apiKey = '9879F9C725917DA8992F12F5F91EB7F3';
-
-        $response = Http::withHeaders([
-            "Content-Type" => "text/plain",
-            "apikey" => $apiKey,
-        ])->get("https://api.ip2whois.com/v2?key={$apiKey}&domain={$domain}");
-
-        $result = urldecode($response->body());
-        $result = json_decode($result, true);
-
-        return view('web.main', compact('domain', 'result'));
-    }
+   
+    
+    
+    // public function webspeed(Request $request){
+    //     $request->validate([
+    //         'requestUrl' => 'required',
+    //     ]);
+    
+    //     $url = $request->input('requestUrl');
+    //     $apiKey = 'AIzaSyBz-3djDWPF8o5uhdkTedftkuEt4tlK3Os';
+    
+    //     $apiUrl = "https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url={$url}&key={$apiKey}";
+    
+    //     try {
+    //         $response = Http::get($apiUrl);
+    
+    //         if ($response->successful()) {
+    //             $pageSpeedData = $response->json();
+    //             return view('web.main', compact('pageSpeedData'));
+    //         } else {
+    //             return "Error: " . $response->status();
+    //         }
+    //     } catch (\Exception $e) {
+    //         return "Error: " . $e->getMessage();
+    //     }
+    // }
     
 }

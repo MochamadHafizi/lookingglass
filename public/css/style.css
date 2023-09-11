@@ -28,6 +28,16 @@ body{
     color: white;
     font-weight: bold;
   }
+
+  @media (max-width: 640px) {
+    #default-sidebar {
+      width: 100%; /* Atur lebar aside menjadi 100% */
+      transform: translateX(0); /* Set ulang transformasi horizontal */
+      overflow-y: hidden; /* Sembunyikan overflow vertikal */
+      overflow-x: auto; /* Tampilkan overflow horizontal secara horizontal */
+    }
+  }
+  
   footer{
     margin-top: 12em;
   }
