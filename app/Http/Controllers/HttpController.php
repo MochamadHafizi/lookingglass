@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 
 class HttpController extends Controller
@@ -11,23 +12,30 @@ class HttpController extends Controller
     }
     public function httphc(Request $request){
         $requestUrl = $request->input('requestUrl');
-        $data = array(
-            "requestUrl" => $requestUrl
-        );
-
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, "https://api.httpstatus.io/v1/status");
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json; charset=utf-8'));
-
-        $resulthttp = curl_exec($ch);
-        // $httpStatusCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-
-        curl_close($ch);
-        $hasilhttp = json_decode($resulthttp, true);
-        
-        return view('web.http', compact('hasilhttp'));
+    
+        $client = new \GuzzleHttp\Client();
+    
+        $headers = [
+            'x-api-key' => '9526cc30-7e83-4ccc-bc88-d514b68a3220',
+            'Content-Type' => 'application/json',
+        ];
+    
+        $body = json_encode([
+            'url' => $requestUrl,
+            'proxyCountry' => 'us',
+            'followRedirect' => true,
+        ]);
+    
+        $response = $client->post('https://api.siterelic.com/httpheader', [
+            'headers' => $headers,
+            'body' => $body,
+        ]);
+    
+        $result = $response->getBody()->getContents();
+    
+        // dd($result);
+         // Mengurai respons sebagai JSON
+        $resultArray = json_decode($result, true);
+        return view('web.http', compact('resultArray'));
     }
 }

@@ -32,7 +32,7 @@
 			{{-- <li><a class="text-xs font-bold text-white hover:text-gray-200" href="{{route('network.index')}}">Network Tools</a></li>
 			<li><a class="text-sm font-bold text-white hover:text-gray-200" href="{{ route('web.index') }}">Web Tools</a></li>
 			<li><a class="text-sm font-bold text-white hover:text-gray-200" href="{{route('speed.index')}}">Speed Test</a></li> --}}
-			<li><span class="text-white text-sm font-bold">Looking Glass Jagoanhosting</span></li>
+			<li><span class="text-white text-sm font-bold">Your IP Address <span id="userIpAddress"></span></span></li>
 		</ul>
 	</nav>
 	<div class="navbar-menu relative z-50 hidden">
@@ -65,9 +65,10 @@
 			</div>
 		</nav>
 	</div>
-    <aside id="sidebar-multi-level-sidebar" class="fixed top-0 left-0 z-40 w-56 h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
+    <aside id="sidebar-multi-level-sidebar" class="fixed top-0 left-0 z-40 w-56 h-screen transition-transform -translate-x-full sm:translate-x-0 shadow-lg" aria-label="Sidebar">
 		<div class="h-full px-3 py-4 overflow-y-auto bg-white">
 			<img src="/img/logo/jh.png" class="mx-auto rounded-full d-block" width="50" alt="">
+			<h1 class="text-orange-400 font-black text-center m-2 text-lg">Looking glass</h1>
 		   <ul class="space-y-2 font-medium mt-10">
 			  <li>
 				 <button type="button" class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-orange-50" aria-controls="dropdown-example" data-collapse-toggle="dropdown-example">
@@ -182,6 +183,22 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 });
+</script>
+<script>
+	// Fungsi untuk mengambil alamat IP klien dari layanan pihak ketiga
+	function getUserIpAddress() {
+		fetch('https://api.ipify.org?format=json')
+			.then(response => response.json())
+			.then(data => {
+				document.getElementById('userIpAddress').textContent = data.ip;
+			})
+			.catch(error => {
+				console.error('Gagal mengambil alamat IP:', error);
+			});
+	}
+
+	// Panggil fungsi untuk mengambil dan menampilkan alamat IP saat halaman dimuat
+	window.onload = getUserIpAddress();
 </script>
 
 </html>

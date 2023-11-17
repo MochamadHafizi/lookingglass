@@ -51,7 +51,7 @@ class TracerouteController extends Controller
         $domain = $request->input('domain');
         $outputrace6 = $this->executeTraceroute6($domain);
 
-        return view('network.traceroute.traceview', compact('domain', 'outputrace6'));
+        return view('network.traceroute.traceview6', compact('domain', 'outputrace6'));
     }
     private function executeTraceroute6($domain)
     {

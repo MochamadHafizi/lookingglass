@@ -6,29 +6,30 @@
         <form class="w-3/4 shadow-md my-5 py-2 px-2 bg-gray-50" method="POST" action="{{route('network.ipinfo')}}">
             @csrf             
             <h3 class="font-black text-xs text-orange-400">IP Info Geolocation</h3>
-            <div class="flex items-center">
-                <!-- Inputan Domain / IP -->
-                <div class="relative z-0 w-full group flex-1">
-                  <input type="text" name="domain" id="domain" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-orange-500 peer text-xs" placeholder=" " required onchange="validateDomainOrIP(this.value)"/>
-                  <label for="domain" style="font-size: 11px;" class="peer-focus:font-medium absolute text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-orange-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Domain / IP</label>
-                  <div id="error-message" class="text-red-500 mt-2"></div>
-                </div>
-              
-                <!-- Captcha -->
-                <div class="relative z-0 w-1/2 group text-sm">
-                    <div class="ml-2 g-recaptcha" data-sitekey="{{ env('RECAPTCHA_SITE_KEY') }}" data-callback="onRecaptchaCallback" style="transform: scale(0.6);"></div>
-                </div>
-                
-                <!-- Tombol Submit -->
-                <button style="margin-left: -7em;" type="submit" id="submitBtn" class="cursor-not-allowed relative inline-flex items-center justify-center p-2 px-4 overflow-hidden font-bold text-orange-600 transition duration-300 ease-out border-2 border-orange-500 rounded-full shadow-md mb-5 group text-sm" disabled>
-                    <span class="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-orange-500 group-hover:translate-x-0 ease">
-                      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                    </span>
-                    <span class="absolute flex items-center justify-center w-full h-full text-orange-500 transition-all duration-300 transform group-hover:translate-x-full ease">Kirim</span>
-                    <span class="relative invisible text-sm">Kirim</span>
-                  </button>
-                  
+            <div class="flex items-center justify-center space-x-2">
+              <!-- Inputan Domain / IP -->
+              <div class="relative z-0 w-full group flex-2">
+                <input type="text" name="domain" id="domain" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-orange-500 peer text-xs" placeholder=" " required onchange="validateDomainOrIP(this.value)"/>
+                <label for="domain" style="font-size: 11px;" class="peer-focus:font-medium absolute text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-orange-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Masukan Alamat IP</label>
+                <div id="error-message" class="text-red-500 mt-2"></div>
               </div>
+            
+              <!-- Captcha -->
+              <div class="relative z-0 w-1/2 group text-sm">
+                  <div class="g-recaptcha" data-sitekey="{{ env('RECAPTCHA_SITE_KEY') }}" data-callback="onRecaptchaCallback" style="transform: scale(0.6);"></div>
+              </div>
+              
+              <!-- Tombol Submit -->
+              <div style="margin-right:10em; ">
+                  <button  type="submit" id="submitBtn" class="cursor-not-allowed relative inline-flex items-center justify-center p-2 px-4 overflow-hidden font-bold text-orange-600 transition duration-300 ease-out border-2 border-orange-500 rounded-full shadow-md mb-5 group text-sm" disabled>
+                      <span class="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-orange-500 group-hover:translate-x-0 ease">
+                      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                      </span>
+                      <span class="absolute flex items-center justify-center w-full h-full text-orange-500 transition-all duration-300 transform group-hover:translate-x-full ease">Kirim</span>
+                      <span class="relative invisible text-sm">Kirim</span>
+                  </button>
+              </div>  
+            </div>
                     @if (isset($api_result))
 
                         <h2 class="text-sm font-semibold mb-4">IP Location Information:</h2>
@@ -92,3 +93,4 @@
   
 
 @endsection
+
